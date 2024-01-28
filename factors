@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+import subprocess
+import sys
+
+def factor_checker(*args):
+    if len(args) != 3:
+        count = 0
+        numb2 = 1
+
+        for i in args:
+            if count > 1:
+                numb2 *= int(i)
+            count += 1
+        else:
+                numb2 = int(args[2])
+
+       numb1 = int(args[1])
+       numb = args[0].replace(":","=")
+
+       result = int(numb2 > numb1)
+       if result == 1:
+           temp = numb1
+           numb1 = numb2
+           numb2 = temp
+
+           print(f"{numb} {numb1 * numb2}")
+
+           if len(sys.argv) != 2:
+               print("Usage: RSA <file>")
+               sys.exit(1)
+           else:
+               with open(sys.argv[1], 'r') as file:
+                    for line in file:
+                        result = subprocess.check_output(['factor', line.strip()]).decode('utf-8).strip()
+                        factor_checker(*result.split())
